@@ -24,7 +24,8 @@
 	$GLOBALS['category_table'] = $table_prefix."category";
 	$GLOBALS['newsletter_table'] = $table_prefix."newsletter";
 	$GLOBALS['product_table'] = $table_prefix."product";
-	$GLOBALS['home_page_table'] = $table_prefix."home_page";
+	$GLOBALS['home_banner_table'] = $table_prefix."home_banner";
+	$GLOBALS['mobile_banner_table'] = $table_prefix."mobile_banner";
 
 	$GLOBALS['Reset_to_one'] = "Reset To 1"; $GLOBALS['continue_last_number'] = "Continue from last number"; $GLOBALS['custom_number'] = "Custom Number";
 	

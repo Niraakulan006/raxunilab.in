@@ -278,9 +278,14 @@
                             <i class="bi bi-person-circle"></i> <span>User</span>
                         </a>
                     </li>
-                    <li class="nav-item" id="banner">
-                        <a class="nav-link menu-link" href="banner.php">
-                            <i class="bi bi-c-circle"></i><span>Banner</span>
+                    <li class="nav-item" id="home_banner">
+                        <a class="nav-link menu-link" href="home_banner.php">
+                            <i class="bi bi-c-circle"></i><span>Home Banner</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="mobile_banner">
+                        <a class="nav-link menu-link" href="mobile_banner.php">
+                            <i class="bi bi-c-circle"></i><span>Mobile Banner</span>
                         </a>
                     </li>
                     <li class="nav-item" id="category">

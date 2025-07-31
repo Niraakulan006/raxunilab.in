@@ -36,9 +36,44 @@
 </head>
 <body itemscope itemtype="http://schema.org/WebPage">
 	
-<?php include('header.php') ?>
+<?php 
+	include('header.php');
+	$target_dir_front = "admin_rax_uni_lab_30072025/include/images/upload/";
+	$home_banner_list = array(); $home_screen_image = "";
+	$home_banner_list = $obj->getTableRecords($GLOBALS['home_banner_table'], '', '');
+	if(!empty($home_banner_list)) {
+		foreach($home_banner_list as $data) {
+			if(!empty($data['home_screen_images']) && $data['home_screen_images'] != $GLOBALS['null_value']) {
+				$home_screen_image = $data['home_screen_images'];
+			}
+		}
+	}
+	$mobile_banner_list = array(); $mobile_screen_image = "";
+	$mobile_banner_list = $obj->getTableRecords($GLOBALS['mobile_banner_table'], '', '');
+	if(!empty($mobile_banner_list)) {
+		foreach($mobile_banner_list as $data) {
+			if(!empty($data['mobile_screen_images']) && $data['mobile_screen_images'] != $GLOBALS['null_value']) {
+				$mobile_screen_image = $data['mobile_screen_images'];
+			}
+		}
+	}
 
-<img src="images/banner1.png" class="img-fluid w-100" alt="" title="">
+	if(!empty($home_screen_image) && file_exists($target_dir_front.$home_screen_image)) {
+		?>
+		<img src="<?php echo $target_dir_front.$home_screen_image; ?>" class="img-fluid w-100 d-lg-block d-none" alt="<?php echo $home_screen_image; ?>" title="<?php echo $home_screen_image; ?>">
+		<?php
+	}
+	else {
+		?>
+		<img src="images/banner1.png" class="img-fluid w-100 d-lg-block d-none" alt="banner1" title="banner1">
+		<?php
+	}
+	if(!empty($mobile_screen_image) && file_exists($target_dir_front.$mobile_screen_image)) {
+		?>
+		<img src="<?php echo $target_dir_front.$mobile_screen_image; ?>" class="img-fluid w-100 d-lg-none d-sm-block" alt="<?php echo $mobile_screen_image; ?>" title="<?php echo $mobile_screen_image; ?>">
+		<?php
+	}
+?>
 
 <div class="welcome-section overflow-hidden">
 	<div class="container pad">
@@ -222,7 +257,6 @@
 		</div>
 		<div id="products" class="owl-carousel">
 			<?php
-				$target_dir_front = "admin_rax_uni_lab_30072025/include/images/upload/";
 				$products_list = array();
 				$products_list = $obj->getTableRecords($GLOBALS['product_table'], 'is_home_product', '1');
 				if(!empty($products_list)) {

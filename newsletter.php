@@ -75,21 +75,21 @@
 	</div>
 </div>
 
-<div class="container pad">
+<div class="container-fluid pad">
 	<div class="row">
 		<div class="col-lg-12 text-center mb-lg-4 mb-3">
 			<div class="heading1 font1 clr2">Newsletter</div>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-lg-8 col-md-7 col-12 order-lg-1 order-md-1 order-2">
+		<div class="col-lg-9 col-md-7 col-12 order-lg-1 order-md-1 order-2">
 			<div class="row justify-content-center mx-0">
 				<?php
 					if(!empty($newsletter_pdfs)) {
 						for($i=0; $i < count($newsletter_pdfs); $i++) {
 							if(!empty($newsletter_pdfs[$i]) && !empty($pdf_names[$i])) {
 								?>
-								<div class="col-lg-6 col-md-12 col-12 py-2">
+								<div class="col-lg-4 col-md-12 col-12 py-2">
 									<div class="sticky-top1">
 										<div id="pdf-preview-container-<?php echo $i; ?>" style="border:1px solid black; width:252px; height:322px; margin:auto; cursor:pointer;" onclick="Javascript:downloadPDF('<?php echo $target_dir_front.$newsletter_pdfs[$i]; ?>', '<?php echo $pdf_names[$i]; ?>');">
 											<script>
@@ -108,7 +108,7 @@
 				?>	
 			</div>
 		</div>
-		<div class="col-lg-4 col-md-5 col-12 order-lg-2 order-md-2 order-1">
+		<div class="col-lg-3 col-md-5 col-12 order-lg-2 order-md-2 order-1">
 			<div class="sticky-top1">
 				<div class="service-head">
 					<div class="heading4 service-title1 bottom-line font1 clr1 mb-2">
