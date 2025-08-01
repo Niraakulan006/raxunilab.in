@@ -43,40 +43,53 @@
 						<li class="nav-item dropdown px-2 <?php if($page == "products"){echo "active";} ?>">
 							<a class="nav-link font1 f-500 clr3 dropdown-toggle" href="products.php" id="navbarDropdownMenuLink1" data-toggle="dropdown">Products</a>
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
-								<?php if(!empty($category_list)) {
-									foreach($category_list as $c_list) { ?>
+								<?php 
+								if(!empty($category_list)) {
+									foreach($category_list as $c_list) { 
+										$sub_category_list = array();
+										$sub_category_list = $obj->getCategoryFilterList('child',$c_list['category_id']); 
+										$c_product_list = array();
+										$c_product_list = $obj->getProductListByCategory($c_list['category_id'],'');
+										?>
 										<li class="dropdown-submenu">
-											<a class="dropdown-item font2 dropdown-toggle" href="#"><?php if(!empty($c_list['category_name'])) { echo $obj->encode_decode('decrypt', $c_list['category_name']); } ?> </a>
-											<?php $sub_category_list = array();
-											$sub_category_list = $obj->getCategoryFilterList('child',$c_list['category_id']); ?>
-											<ul class="dropdown-menu">
-												<?php if(!empty($sub_category_list)) { ?>
-													<?php foreach($sub_category_list as $sub_list) { ?>
-														<li class="dropdown-submenu">
-															<a class="dropdown-item font2 dropdown-toggle" href="#"><?php if(!empty($sub_list['category_name'])) { echo $obj->encode_decode('decrypt', $sub_list['category_name']); } ?></a>
-															<?php $product_list = array();
-															$product_list = $obj->getProductListByCategory('',$sub_list['category_id']); 
-															if(!empty($product_list)) { ?>
-																<ul class="dropdown-menu">
-																	<?php foreach($product_list as $p_list) { ?>
-																		<li><a class="dropdown-item font2" href="products.php?product_id=<?php if(!empty($p_list['product_id'])) { echo $p_list['product_id']; } ?>"><?php if(!empty($p_list['product_name'])) { echo $obj->encode_decode('decrypt', $p_list['product_name']);  } ?></a></li>
+											<a class="dropdown-item font2 <?php if(!empty($sub_category_list) || !empty($c_product_list)) { ?>dropdown-toggle<?php } ?>" href="#"><?php if(!empty($c_list['category_name'])) { echo $obj->encode_decode('decrypt', $c_list['category_name']); } ?> </a>
+											<?php 
+												if(!empty($sub_category_list) || !empty($c_product_list)) {
+													?>
+													<ul class="dropdown-menu">
+														<?php
+															foreach($sub_category_list as $sub_list) {
+																?>
+																<li class="dropdown-submenu">
+																	<a class="dropdown-item font2 dropdown-toggle" href="#"><?php if(!empty($sub_list['category_name'])) { echo $obj->encode_decode('decrypt', $sub_list['category_name']); } ?></a>
+																	<?php 
+																	$product_list = array();
+																	$product_list = $obj->getProductListByCategory('',$sub_list['category_id']); 
+																	if(!empty($product_list)) { 
+																		?>
+																		<ul class="dropdown-menu">
+																			<?php foreach($product_list as $p_list) { ?>
+																				<li><a class="dropdown-item font2" href="products.php?product_id=<?php if(!empty($p_list['product_id'])) { echo $p_list['product_id']; } ?>"><?php if(!empty($p_list['product_name'])) { echo $obj->encode_decode('decrypt', $p_list['product_name']);  } ?></a></li>
+																			<?php } ?>
+																		</ul>
 																	<?php } ?>
-																</ul>
-															<?php } ?>
-														</li>
-													<?php } ?>
-												<?php } ?>
-												<?php $product_list = array();
-												$product_list = $obj->getProductListByCategory($c_list['category_id'],''); 
-												if(!empty($product_list)) { ?>
-													<?php foreach($product_list as $p_list) { ?>
-														<li><a class="dropdown-item font2" href="products.php?product_id=<?php if(!empty($p_list['product_id'])) { echo $p_list['product_id']; } ?>"><?php if(!empty($p_list['product_name'])) { echo $obj->encode_decode('decrypt', $p_list['product_name']);  } ?></a></li>
-													<?php } ?>
-												<?php } ?>
-											</ul>
+																</li>
+																<?php 
+															}
+															foreach($c_product_list as $p_list) { ?>
+																<li><a class="dropdown-item font2" href="products.php?product_id=<?php if(!empty($p_list['product_id'])) { echo $p_list['product_id']; } ?>"><?php if(!empty($p_list['product_name'])) { echo $obj->encode_decode('decrypt', $p_list['product_name']);  } ?></a></li>
+																<?php
+															}
+														?>
+													</ul>
+													<?php
+												}
+											?>
 										</li>
-									<?php }
-								} ?>
+										<?php 
+									}
+								} 
+								?>
 							</ul>
 						</li>
 						<li class="nav-item px-2 <?php if($page == "newsletter"){echo "active";} ?>">

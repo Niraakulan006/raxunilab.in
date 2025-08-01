@@ -68,6 +68,11 @@
 			$target_dir = parent::front_image_directory();
 			return $target_dir;
 		}
+		public function front_end_description_directory() {
+			$target_dir = "";		
+			$target_dir = parent::front_end_description_directory();
+			return $target_dir;
+		}
 		public function temp_image_directory() {
 			$temp_dir = "";		
 			$temp_dir = parent::temp_image_directory();

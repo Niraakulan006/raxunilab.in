@@ -40,7 +40,7 @@
 <?php include('header.php') ?>
 <?php 
 	$product_id = $product_name = $description = ''; $related_products = array();
-	$target_dir = $obj->front_image_directory();
+	$target_dir = $obj->front_image_directory(); $description_dir = $obj->front_end_description_directory();
 
 	if(isset($_REQUEST['product_id'])) {
 		$product_id = $_REQUEST['product_id'];
@@ -55,7 +55,7 @@
 				$product_name = $obj->encode_decode('decrypt', $data['product_name']);
 			}
 			if(!empty($data['description']) && $data['description'] != $GLOBALS['null_value']) {
-				$description =html_entity_decode( $obj->encode_decode('decrypt', $data['description']));
+				$description = html_entity_decode($obj->encode_decode('decrypt', $data['description']));
 			}
 			if(!empty($data['images']) && $data['images'] != $GLOBALS['null_value']) {
 				$images = explode(',',$data['images']);
@@ -92,62 +92,71 @@
 			<div class="smallborder1"></div>
 			<div class="font2 pb-2">
 				<?php if (!empty($images)) { ?>
-				<style>
-					.carousel-control-prev-icon,
-					.carousel-control-next-icon {
-					filter: invert(1); /* Makes the white icon black */
-					}
+					<style>
+						.carousel-control-prev-icon,
+						.carousel-control-next-icon {
+							filter: invert(1); /* Makes the white icon black */
+						}
 
-					/* Optional: Add border/rounded corners */
-					#imageCarousel img {
-					border-radius: 8px;
-					}
-				</style>
-
-				<div class="container">
-					<div class="row justify-content-center">
-					<div class="col-md-6"> <!-- Reduced width -->
-						<div id="imageCarousel" class="carousel slide" data-ride="carousel">
-						<div class="carousel-inner">
-							<?php 
-							$activeSet = false;
-							foreach ($images as $key => $image) {
-							if (!empty($image) && file_exists($target_dir . $image)) {
-								$activeClass = !$activeSet ? 'active' : '';
-								$activeSet = true;
-							?>
-							<div class="carousel-item <?php echo $activeClass; ?>">
-								<img src="<?php echo $target_dir . $image; ?>" class="d-block w-100" alt="Slide <?php echo $key + 1; ?>">
+						/* Optional: Add border/rounded corners */
+						#imageCarousel img {
+							border-radius: 8px;
+						}
+					</style>
+					<div class="container">
+						<div class="row justify-content-center">
+						<div class="col-md-6"> <!-- Reduced width -->
+							<div id="imageCarousel" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner">
+								<?php 
+									$activeSet = false;
+									foreach ($images as $key => $image) {
+										if (!empty($image) && file_exists($target_dir . $image)) {
+											$activeClass = !$activeSet ? 'active' : '';
+											$activeSet = true;
+											?>
+											<div class="carousel-item <?php echo $activeClass; ?>">
+												<img src="<?php echo $target_dir.$image; ?>" class="d-block w-100" alt="Slide <?php echo $key + 1; ?>">
+											</div>
+											<?php 
+										}
+									} 
+								?>
 							</div>
-							<?php 
-							}
-							} 
-							?>
-						</div>
 
-						<!-- Controls -->
-						<a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
-							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							<span class="sr-only">Previous</span>
-						</a>
-						<a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
-							<span class="carousel-control-next-icon" aria-hidden="true"></span>
-							<span class="sr-only">Next</span>
-						</a>
+							<!-- Controls -->
+							<?php if(!empty($images)) { ?>
+								<a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+									<span class="sr-only">Previous</span>
+								</a>
+								<a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+									<span class="sr-only">Next</span>
+								</a>
+							<?php } ?>
+							</div>
+						</div>
 						</div>
 					</div>
-					</div>
-				</div>
 				<?php } ?>
-
-
 			</div>
-			<div class="font2 pb-2">
-				<?php if(!empty($description) ) {
-					echo $description;
-				} ?>
+			<div class="font2 pb-2 description_div" style="list-style-type:inherit !important;">
+				<?php
+					if (!empty($description)) {
+						echo $description;
+					}
+				?>
 			</div>
-			
+			<script type="text/javascript">
+				if(jQuery('.description_div').length > 0) {
+					jQuery('.description_div').find('img').each(function() {
+						var src_attr = jQuery(this).attr('src');
+						var admin_folder_name = "admin_rax_uni_lab_30072025/";
+						jQuery(this).attr('src', admin_folder_name+src_attr);
+					});
+				}
+			</script>
 		</div>
 		<div class="col-lg-4 col-md-12 col-12">
 			<div class="sticky-top1">

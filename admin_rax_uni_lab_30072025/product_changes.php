@@ -33,7 +33,7 @@
                         $images = $data['images'];
                     }
                     if(!empty($data['description']) && $data['description'] != $GLOBALS['null_value']) {
-                        $description =html_entity_decode( $obj->encode_decode('decrypt', $data['description']));
+                        $description = html_entity_decode($obj->encode_decode('decrypt', $data['description']));
                     }
                 }
             }
@@ -214,207 +214,21 @@
 
                         <div class="col-12">
                             <div class="form-group">
-                                <label class="form-control-label">Description</label>
-                                <input type="hidden" name="description_content" value="" class="form-control shadow-none">
-                                <div class="w-100 description">
-                                    <textarea name="description" id="description" class="form-control" rows="3"><?php echo $description; ?></textarea>
+                                <div class="description">
+                                    <label class="form-control-label">Description</label>
+                                    <input type="hidden" name="description_content" value="" class="form-control shadow-none">
+                                    <div class="w-100 description">
+                                        <textarea name="description" id="description" class="form-control" rows="3"><?php echo $description; ?></textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-12 pt-3 text-center">
-                            <button class="btn btn-dark submit_button" type="button">
+                            <button class="btn btn-dark submit_button" type="button" onclick="Javascript:SaveModalContent(event, 'product_form', 'product_changes.php', 'product.php');">
                                 Submit
                             </button>
                         </div>
-                        
-                        <script type="text/javascript">
-                            jQuery('.submit_button').click(function(event){
-                                var description = tinymce.get('description').getContent();
-                                document.querySelector('input[name="description_content"]').value = description;
-                                SaveModalContent(event, 'product_form', 'product_changes.php', 'product.php');
-                            });
-                        </script>
-                       <!--  <script src="include/wysiwyg_editor/editor.js"></script>
-                        <script type="text/javascript" defer="defer">
-                            $(document).ready(function() {
-                                if($("#description").length > 0) {
-                                    $("#description").Editor();
-                                }
-                            });
-                        </script>
-                        <link href="include/wysiwyg_editor/editor.css" type="text/css" rel="stylesheet"/>
-
-                        <?php 
-                            if(!empty($description)) {                     
-                                $description = str_replace(array("\r", "\n"), '<br>', $description);
-                        ?>
-                        <script type="text/javascript" defer="defer">
-                            setTimeout(function(){ 
-                                    if($(".description").find('.fa-code').length > 0) {
-                                        $(".description").find('.fa-code').parent('a').trigger('click');
-                                        $(".description").find(".Editor-editor").find('pre').html('<?php echo $description; ?>');
-                                        $(".description").find('.fa-code').parent('a').trigger('click');
-                                    }
-                            }, 1000);
-                        </script>
-                        <?php } ?> -->
-
-
-                        <!-- <script src="include/js/ckeditor.js"></script>
-                        <script>
-                            class MyUploadAdapter {
-                                constructor(loader) {
-                                    this.loader = loader;
-                                }
-
-                                upload() {
-                                    return new Promise((resolve, reject) => {
-                                        const data = new FormData();
-                                        this.loader.file.then(file => {
-                                            data.append('upload', file);
-
-                                            fetch('ck_upload.php', {
-                                                method: 'POST',
-                                                body: data,
-                                                headers: {
-                                                    
-                                                }
-                                            })
-                                            .then(response => {
-                                                if (!response.ok) {
-                                                    throw new Error('Upload failed: ' + response.statusText);
-                                                }
-                                                return response.json();
-                                            })
-                                            .then(result => {
-                                                if (result.url) {
-                                                    resolve({
-                                                        default: result.url
-                                                    });
-                                                    this.editor.ui.update();
-                                                } else {
-                                                    reject('Upload failed: no URL returned.');
-                                                }
-                                            })
-                                            .catch(error => {
-                                                reject('Upload failed: ' + error.message);
-                                            });
-                                        });
-                                    });
-                                }
-
-                                abort() {
-                                    console.log('Upload aborted.');
-                                }
-                            }
-                        </script>
-                        <script type="text/javascript" defer="defer">
-
-                            ClassicEditor
-                            .create(document.querySelector('#description'), {
-                                toolbar: [
-                                    'undo', 'redo', 'bold', 'italic', 'link', '|',
-                                    'alignment', 'imageUpload', 'blockQuote', 'bulletedList', 'numberedList', '|',
-                                    'insertTable', 'codeBlock', 'outdent', 'indent', '|',
-                                    'fontFamily', 'fontSize', 'fontColor', 'highlight', 'horizontalLine', 'specialCharacters','|', 
-                                    'heading', 'paragraph'
-                                ],
-                                heading: {
-                                    options: [
-                                        { model: 'paragraph', title: 'Normal', view: 'p' },
-                                        { model: 'heading1', view: 'h1', title: 'Heading 1' },
-                                        { model: 'heading2', view: 'h2', title: 'Heading 2' },
-                                        { model: 'heading3', view: 'h3', title: 'Heading 3' },
-                                        { model: 'heading4', view: 'h4', title: 'Heading 4' },
-                                        { model: 'heading5', view: 'h5', title: 'Heading 5' },
-                                        { model: 'heading6', view: 'h6', title: 'Heading 6' }
-                                    ]
-                                },
-                                image: {
-                                    toolbar: [
-                                        'imageStyle:inline', 'imageStyle:block', 'imageStyle:side', '|',
-                                        'resizeImage', 'imageTextAlternative'
-                                    ]
-                                }
-                            })
-                            .then(editor => {
-                                // window.editor = edi
-                                editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-                                    return new MyUploadAdapter(loader);
-                                };
-                                editorInstance = editor; 
-                            })
-                            .catch(error => {
-                                console.error(error);
-                            });
-                        </script> -->
-
-                        <!-- <style>
-                            .ck-editor__editable_inline {
-                                min-height: 300px;
-                                min-width: 600px;
-                            }
-                            ul {
-                                list-style-type: disc;
-                                padding-left: 20px;
-                            }
-
-                            /* Default styles for ordered list */
-                            ol {
-                                padding-left: 20px;
-                            }
-
-                            /* Specific styles for CKEditor lists */
-                            .ck-editor__editable ul {
-                                list-style-type: disc;
-                            }
-                            strong {
-                                font-weight: 700;
-                            }
-
-                            blockquote {
-                                display: block;
-                                margin-top: 1em;
-                                margin-bottom: 1em;
-                                margin-left: 40px;
-                                margin-right: 40px;
-                                border-color : none !important;
-                                border-left : 5px !important;
-                                /* font-style: normal; */
-                            }
-
-                            .ck-editor__editable img {
-                                width : 100% !important;
-                                height: auto;
-                            } 
-                        </style> -->
-
-                        <script src="include/tinymce/js/tinymce/tinymce.min.js"></script>
-                        
-                        <script>
-                            tinymce.init({
-                                selector: 'textarea#description',
-                                height: 500,
-                                automatic_uploads: true,
-                                menubar: 'file edit view insert format tools table help',
-                                plugins: [
-                                    'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                                    'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                                    'insertdatetime', 'media', 'table', 'help', 'wordcount'
-                                ],
-                                toolbar: 'undo redo | formatselect | ' +
-                                    'bold italic underline | alignleft aligncenter alignright | ' +
-                                    'bullist numlist outdent indent | link image media table | ' +
-                                    'charmap preview code fullscreen',
-                                
-                                // ✅ COMMA FIXED ABOVE
-                                images_upload_handler: function (blobInfo, success, failure) {
-                                    success("data:" + blobInfo.blob().type + ";base64," + blobInfo.base64());
-                                }
-                            });
-                        </script>
-
                     </div>
                 </div>
             </div>
@@ -423,6 +237,7 @@
         <script type="text/javascript" src="include/js/image_upload.js"></script>
         <script type="text/javascript" src="include/js/cropper_image_upload.js"></script>
         <script src="include/select2/js/select2.full.min.js"></script>
+        <script src="include/js/ckeditor.js"></script>
         <script>
             $(function () {
             //Initialize Select2 Elements
@@ -433,10 +248,132 @@
                 theme: 'bootstrap4'
             })})
         </script>
+        <script>
+            class MyUploadAdapter {
+                constructor(loader) {
+                    this.loader = loader;
+                }
+                upload() {
+                    return new Promise((resolve, reject) => {
+                        const data = new FormData();
+                        this.loader.file.then(file => {
+                            data.append('upload', file);
+                            // Use your actual upload endpoint here
+                            fetch('ck_upload.php', {
+                                method: 'POST',
+                                body: data,
+                                headers: {
+                                    // Add any necessary headers here (e.g., authentication)
+                                }
+                            })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Upload failed: ' + response.statusText);
+                                }
+                                return response.json();
+                            })
+                            .then(result => {
+                                // If the upload is successful, resolve with the uploaded image URL
+                                if (result.url) {
+                                    resolve({
+                                        default: result.url
+                                    });
+                                    this.editor.ui.update();
+                                } else {
+                                    reject('Upload failed: no URL returned.');
+                                }
+                            })
+                            .catch(error => {
+                                reject('Upload failed: ' + error.message);
+                            });
+                        });
+                    });
+                }
+                abort() {
+                    console.log('Upload aborted.');
+                }
+            }
+        </script>
+            
+        <script type="text/javascript" defer="defer">
+            ClassicEditor
+            .create(document.querySelector('#description'), {
+                
+                toolbar: [
+                    'undo', 'redo', 'bold', 'italic', 'link', '|',
+                    'imageUpload', 'blockQuote', 'bulletedList', 'numberedList', '|',
+                    'insertTable', 'outdent', 'indent', '|',
+                    'heading',                     
+                ],
+                heading: {
+                    options: [
+                        { model: 'paragraph', title: 'Normal', view: 'p' },
+                        { model: 'heading1', view: 'h1', title: 'Heading 1' },
+                        { model: 'heading2', view: 'h2', title: 'Heading 2' },
+                        { model: 'heading3', view: 'h3', title: 'Heading 3' },
+                        { model: 'heading4', view: 'h4', title: 'Heading 4' },
+                        { model: 'heading5', view: 'h5', title: 'Heading 5' },
+                        { model: 'heading6', view: 'h6', title: 'Heading 6' }
+                    ]
+                },
+                image: {
+                    toolbar: [
+                        'imageStyle:inline', 'imageStyle:block', 'imageStyle:side', '|',
+                        'imageTextAlternative'
+                    ]
+                }
+            })
+            
+            .then(editor => {
+                // window.editor = edi
+                editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                    return new MyUploadAdapter(loader);
+                };
+                tamileditorInstance = editor; 
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        </script>
+        <style>
+            .ck-editor__editable_inline {
+                min-height: 300px;
+                min-width: 600px;
+            }
+            ul {
+                list-style-type: disc;
+                padding-left: 20px;
+            }
+            /* Default styles for ordered list */
+            ol {
+                padding-left: 20px;
+            }
+            /* Specific styles for CKEditor lists */
+            .ck-editor__editable ul {
+                list-style-type: disc;
+            }
+            strong {
+                font-weight: 700;
+            }
+            blockquote {
+                display: block;
+                margin-top: 1em;
+                margin-bottom: 1em;
+                margin-left: 40px;
+                margin-right: 40px;
+                border-color : none !important;
+                border-left : 5px !important;
+                /* font-style: normal; */
+            }
+            img {
+                width : 100% !important;
+                height: auto;
+            } 
+        </style>
         <?php
     }
     if(isset($_POST['edit_id'])) {	
-		$product_name = ""; $product_name_error = ""; $category_id = ""; $category_id_error = ""; $category_name = ""; $sub_category_id = ""; $sub_category_id_error = ""; $sub_category_name = ""; $valid_product = ""; $form_name = "product_form"; $related_products = ""; $product_image_error = ""; $product_image_name_position = array();
+		$product_name = ""; $product_name_error = ""; $category_id = ""; $category_id_error = ""; $category_name = ""; $sub_category_id = ""; $sub_category_id_error = ""; $sub_category_name = ""; $valid_product = ""; $form_name = "product_form"; $related_products = ""; $product_image_error = ""; $product_image_name_position = array(); $description = ""; $description_error = "";
 		$edit_id = $_POST['edit_id'];
         $edit_id = trim($edit_id);
         // print_r($_POST);
@@ -565,17 +502,12 @@
                 //     $product_image_error = "First poisiton image missing";
                 // }
             }
-            else {                
-                $product_image_name[] = "default_image.png";
-            }
         }
 
-        if(isset($_POST['description_content'])) {
-			$description = $_POST['description_content'];
-			$description = trim($description);
+       if(isset($_POST['description'])){
+			$description = $_POST['description'];
 		}
-        // $description = preg_replace('/<img(.*?)>/i', '<img$1 style="width: 100%;" />', $description);
-
+        $description = preg_replace('/<img(.*?)>/i', '<img$1 style="width: 50%;height: 50%;" />', $description);
         $result = "";
 		
 		if(empty($valid_product) && empty($product_image_error)) {
@@ -596,6 +528,9 @@
 				}
                 if(!empty($product_image_name)) {
                     $images = implode(",", $product_image_name);
+                }
+                else {
+                    $product_image_name = $GLOBALS['null_value'];
                 }
                 if(empty($images)) {
 					$images = $GLOBALS['null_value'];
@@ -618,12 +553,11 @@
                 }
 
                 if(!empty($description)) {
-                    $description = htmlentities($description, ENT_QUOTES);
-					$description = $obj->encode_decode('encrypt', $description);
-				}
-				else {
-					$description = $GLOBALS['null_value'];
-				}
+                    $description = $obj->encode_decode('encrypt', $description);
+                } 
+                else {
+                    $description = $GLOBALS['null_value'];
+                }
  
                 $prev_product_id = ""; $products_error = "";
                 $prev_product_id = $obj->getProductID($category_id,$sub_category_id, $lower_case_name);
@@ -695,7 +629,7 @@
                 if(!empty($image_copy) && $image_copy == 1) {
                     $target_dir = $obj->image_directory(); $temp_dir = $obj->temp_image_directory();
 
-                    if(!empty($product_image_name)) {
+                    if(!empty($product_image_name) && $product_image_name != $GLOBALS['null_value']) {
                         foreach($product_image_name as $image) {
                             if(!empty($image) && file_exists($temp_dir.$image)) {
                                 copy($temp_dir.$image, $target_dir.$image);
@@ -705,7 +639,7 @@
                     if(!empty($prev_images)) {
                         $prev_images = explode(",", $prev_images);
                         foreach($prev_images as $image) {
-                            if(!empty($image) && !in_array($image, $product_image_name) && file_exists($target_dir.$image)) {
+                            if(!empty($image) && $product_image_name != $GLOBALS['null_value'] && !in_array($image, $product_image_name) && file_exists($target_dir.$image)) {
                                 unlink($target_dir.$image);
                             }
                         }

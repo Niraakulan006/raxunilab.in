@@ -66,7 +66,7 @@
                     <div class="form-group">
                         <div class="form-label-group in-border">
                             <div class="input-group mb-1">
-                                <input type="text" class="form-control shadow-none" id="category_name" name="category_name" value="<?php if (!empty($category_name)) { echo $category_name;} ?>" maxlength="20">
+                                <input type="text" class="form-control shadow-none" id="category_name" name="category_name" value="<?php if (!empty($category_name)) { echo $category_name;} ?>">
                                 <label>Category</label> 
                             </div>
                         </div>
@@ -134,16 +134,9 @@
         if (isset($_POST['category_name'])) {
             $single_category_name = $_POST['category_name'];
 
-            if (strlen($single_category_name) > 20) {
-                $category_name_err = "Only 20 characters allowed";
-                if (!empty($category_name_err)) {
-                    $valid_category = $valid->error_display($form_name, "category_name", $category_name_err, 'text');
-                }
-            }
-
             // echo ($single_category_name);
             if (!empty($single_category_name)) {
-                $category_error = $valid->valid_text_number($single_category_name, "Category Name", "1",'30');
+                $category_error = $valid->valid_text_number($single_category_name, "Category Name", "1",'');
                 if (!empty($category_error)) {
                     $valid_category = $valid->error_display($form_name, "category_name", $category_error, 'text');
                 }

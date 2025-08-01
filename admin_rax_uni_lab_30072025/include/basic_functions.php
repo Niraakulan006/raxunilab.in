@@ -538,6 +538,10 @@
 			$target_dir = "admin_rax_uni_lab_30072025/include/images/upload/";
 			return $target_dir;
 		}
+		public function front_end_description_directory() {
+			$target_dir = "admin_rax_uni_lab_30072025/images/ck_upload/";
+			return $target_dir;
+		}
 		public function temp_image_directory() {
 			$temp_dir = "include/images/temp/";
 			return $temp_dir;

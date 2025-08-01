@@ -71,7 +71,7 @@
                                         <div class="col-lg-12 col-md-12 col-12">           
                                             <img src="images/cloudupload.png" id="newsletter_pdf_preview" class="img-fluid w-50 mx-auto d-block" alt="Upload" title="Upload">
                                             <!-- <div class="text-center h5">(Image Size 1500 x 500)</div> -->
-                                            <div class="text-center smallfnt">(Upload PDF)</div>
+                                            <div class="text-center smallfnt">(Upload PDF)<br>(Max Size : 5 MB)</div>
                                         </div>  
                                     </div>
                                 </div>   
