@@ -12,8 +12,8 @@
 				</div>
 				<div class="topbar-right">
 					<ul>
-						<li><i class="bi bi-telephone mr-1"></i>  Call Us - +9189785 43300</li>
-						<li><i class="bi bi-envelope mr-1"></i>  @gmail.com</li>      
+						<li><i class="bi bi-telephone mr-1"></i>  Call Us - +91 89785 43300</li>
+						<li><i class="bi bi-envelope mr-1"></i>  raxunilab@gmail.com</li>      
 					</ul>
 				</div>
 			</div>
@@ -24,12 +24,12 @@
 			<div class="container clearfix">
 				<div class="logo-header">
 					<a href="index.php">
-						<img src="images/logo.png" class="img-fluid wow rotateIn" alt="RAX UNIQUE TECHNOLOGIES" title="RAX UNIQUE TECHNOLOGIES">
+						<img src="images/rax-logo.png" class="img-fluid wow rotateIn" alt="RAX UNIQUE TECHNOLOGIES" title="RAX UNIQUE TECHNOLOGIES">
 					</a>
 				</div>
 				<div class="extra-nav">
 					<div class="extra-cell">
-						<a class="btn btn-danger btn-border white-border font1" href="contact.php">CONTACT US</a>
+						<a class="btn btn-danger btn-border white-border font1" href="contact.php">Enquire Now</a>
 					</div>
 				</div>
 				<div class="header-nav navbar-collapse justify-content-start collapse">

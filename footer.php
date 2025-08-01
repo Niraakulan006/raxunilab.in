@@ -1,11 +1,11 @@
 <div class="footerbg">
 	<div class="container-fluid px-lg-5 py-5 text-light">
 		<div class="row">
-			<div class="col-lg-4 col-md-6">
+			<div class="col-lg-3 col-md-6">
 				<img src="images/logo.png" class="img-fluid w-50 mx-auto pb-2" alt="RAX UNIQUE TECHNOLOGIES" title="RAX UNIQUE TECHNOLOGIES">
-				<p class="font2">RAX UNIQUE TECHNOLOGIES is a trusted manufacturer and supplier of high-performance laboratory and industrial equipment.</p>
+				<p class="font2">RAXUNILAB Private Limited is a trusted manufacturer and supplier of high-performance laboratory and industrial equipment.</p>
 			</div>
-			<div class="col-lg-3 col-md-6 align-self-center">
+			<div class="col-lg-4 col-md-6">
 				<div class="heading3 font1 pb-3">Contact Information</div>
 					<div class="d-flex align-items-center pb-3 mb-2">
 						<div class="topicon">
@@ -13,8 +13,8 @@
 						</div>
 						<div class="icon-info">
 							<div class="font2 smallfnt m-0 p-0">RAXUNILAB PRIVATE LIMITED
-No: 164, First Floor, Tasiowa Nagar, Ramamoorthy 3rd Main Road, Pazhanthandalam, Thirumudivakkam, Chennai-600 044.
-Tamil Nadu. India.</div>
+								No: 145, First Floor, Tasiowa Nagar, Ramamoorthy 3rd Main Road, Pazhanthandalam, Thirumudivakkam, Chennai-600 044.
+								Tamil Nadu. India.</div>
 						</div>
 					</div>
 					<div class="d-flex align-items-center pb-3 mb-2">
@@ -41,11 +41,11 @@ Tamil Nadu. India.</div>
 						</div>
 						<div class="icon-info">
 							<div class="font1">Email Us</div>
-							<div class="font2 smallfnt m-0 p-0"> @mail.com</div>
+							<div class="font2 smallfnt m-0 p-0"> raxunilab@gmail.com</div>
 						</div>
 					</div>
 			</div>
-			<div class="col-lg-2 col-md-6 align-self-center">
+			<div class="col-lg-2 col-md-6">
 				<div class="heading3 font1 pb-2 mb-lg-3">Quick Links</div>
 					<div class="contact-menu">
 						<ul>
@@ -57,14 +57,35 @@ Tamil Nadu. India.</div>
 						</ul>
 					</div>
 			</div>
-			<div class="col-lg-3 col-md-6 align-self-center">
+			<div class="col-lg-3 col-md-6">
 				<div class="heading3 font1 pb-2 mb-1">Products</div>
 					<ul>
-						<li><a class="font2 text-light pb-1" href="products.php">Vibratory Cup Mill (VCM)</a></li>
-						<li><a class="font2 text-light pb-1" href="products.php">Jaw Crusher, Hammer Mill, Roller Crusher</a></li>
-						<li><a class="font2 text-light pb-1" href="products.php">Hydraulic Press</a></li>
-						<li><a class="font2 text-light pb-1" href="products.php">Sample Divider (Riffler / CON-QUAD)</a></li>
-						<li><a class="font2 text-light pb-1" href="products.php">Pulverizers (Micro BEE, Disc Type) </a> </li>
+						<?php
+							$products_list = array();
+							$products_list = $obj->getTableRecords($GLOBALS['product_table'], 'is_home_product', '1');
+							if(!empty($products_list)) {
+								foreach($products_list as $data) {
+									if(!empty($data['product_id']) && $data['product_id'] != $GLOBALS['null_value']) {
+										$product_name = "";
+										if(!empty($data['product_name']) && $data['product_name'] != $GLOBALS['null_value']) {
+											$product_name = $obj->encode_decode('decrypt', $data['product_name']);
+										}
+										?>
+										<li><a class="font2 text-light pb-1" href="products.php?product_id=<?php echo $data['product_id']; ?>"><?php echo $product_name; ?></li>
+										<?php
+									}
+								}
+							}
+							else {
+								?>
+								<li><a class="font2 text-light pb-1" href="#">Vibratory Cup Mill (VCM)</a></li>
+								<li><a class="font2 text-light pb-1" href="#">Jaw Crusher, Hammer Mill, Roller Crusher</a></li>
+								<li><a class="font2 text-light pb-1" href="#">Hydraulic Press</a></li>
+								<li><a class="font2 text-light pb-1" href="#">Sample Divider (Riffler / CON-QUAD)</a></li>
+								<li><a class="font2 text-light pb-1" href="#">Pulverizers (Micro BEE, Disc Type) </a> </li>
+								<?php
+							}
+						?>
 					</ul>
 			</div>
 		</div>
@@ -73,7 +94,7 @@ Tamil Nadu. India.</div>
 <div class="container-fluid copywritebg">
 	<div class="row">
 		<div class="col-lg-12 text-center font2 py-3 text-white">
-				Copyright © 2025 Raxunilab All Rights Reserved. Developed by&nbsp;<a class="text-white" href="http://www.srisoftwarez.com/">Srisoftwarez </a> 
+				Copyright &copy; 2025 Raxunilab All Rights Reserved. Developed by&nbsp;<a class="text-white" href="http://www.srisoftwarez.com/">Srisoftwarez </a> 
 		</div>	
 	</div>
 </div>

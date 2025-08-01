@@ -58,7 +58,7 @@
 			<img src="images/owner.png" class="img-fluid p-3 bg-white shadow rounded d-block mx-auto" alt="" title="">
 		</div>
 		<div class="col-lg-8 col-md-12">
-			<h1 class="heading6 font1 clr1 text-uppercase">Raxunilab</h1>
+			<h1 class="heading6 font1 clr1 text-uppercase">Raxunilab Private Limited</h1>
 			<div class="heading1 font1 clr2 pb-3">Who we are</div>
 			<ul class="list col-12 fullpad">
 				<li>
@@ -84,9 +84,9 @@
 			</ul>
 		</div>
 		<div class="col-lg-12">
-			<p class="font2">As RAX Unique embarks on another year of innovation and growth, we're excited to share our vision, objectives, and initiatives that will propel our success. The past year was marked by challenges and opportunities that allowed us to explore new equipment and technologies, enhancing our manufacturing capabilities.</p>
+			<p class="font2">As RAX Products embarks on another year of innovation and growth, we're excited to share our vision, objectives, and initiatives that will propel our success. The past year was marked by challenges and opportunities that allowed us to explore new equipment and technologies, enhancing our manufacturing capabilities.</p>
 			<p class="font2 ">With renewed determination, we're poised to deliver high-quality products that meet and exceed customer expectations in the new financial year.</p>
-			<p class="font2">Thank you for your ongoing support and trust in Rax Unique.</p>
+			<p class="font2">Thank you for your ongoing support and trust in Raxunilab.</p>
 		</div>
 	</div>
 </div>

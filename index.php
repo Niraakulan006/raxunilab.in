@@ -99,7 +99,7 @@
 			</div>
 			<div class="col-lg-6 col-md-12 align-self-center ord2">
 				<div class="heading6 font1 clr4 pb-1">Smart Machines Reliable Results.</div>
-				<h1 class="heading2 font1 font-weight-bold pb-2 clr2">RAX UNIQUE TECHNOLOGIES</h1>
+				<h1 class="heading2 font1 font-weight-bold pb-2 clr2">RAX Products</h1>
 				<p class="font2 text-secondary">We build machines that labs & industries trust every day. Whether it’s grinding, crushing, pressing or dividing samples our equipment is designed to make your job simple, accurate & reliable. With a strong presence across Hyderabad, Jharsuguda & Chennai, we are proud to support leading cement, mining & material testing labs across India.</p>
 				<ul class="list col-12 fullpad">
 					<li>
@@ -124,7 +124,7 @@
 					<div class="media-body">
 						<span class="header-info_label">Talk to Us</span>
 						<p class="header-info_link">
-							<a href="tel:+919999999999" class="clr3">+9189785 43300 </a>
+							<a href="tel:+919999999999" class="clr3">+91 89785 43300 </a>
 						</p>
 					</div>
 				</div>

@@ -63,7 +63,7 @@
 		<div class="col-lg-4 col-md-6 col-12 pt-4 text-center">
 			<span class="iconsa1"><i class="bi bi-map"></i></span>
 			<div class="font1 clr4 heading4 pb-2">Address</div>
-			<p class="font2 smallfnt">No: 164, First Floor, Tasiowa Nagar, Ramamoorthy 3rd Main Road, Pazhanthandalam, Thirumudivakkam, Chennai-600 044. Tamil Nadu. India.</p>
+			<p class="font2 smallfnt">No: 145, First Floor, Tasiowa Nagar, Ramamoorthy 3rd Main Road, Pazhanthandalam, Thirumudivakkam, Chennai-600 044. Tamil Nadu. India.</p>
 		</div>
 		<div class="col-lg-4 col-md-6 col-12 pt-4 text-center">
 			<span class="iconsa1"><i class="bi bi-telephone"></i></span>
@@ -73,7 +73,7 @@
 		<div class="col-lg-4 col-md-6 col-12 pt-4 text-center">
 			<span class="iconsa1"><i class="bi bi-envelope-check"></i></span>
 			<div class="font1 clr4 heading4 pb-2">Email</div>
-			<p class="font2 smallfnt">@gmail.com</p>
+			<p class="font2 smallfnt">raxunilab@gmail.com</p>
 		</div>
 	</div>
 	<div class="row pt-3">
