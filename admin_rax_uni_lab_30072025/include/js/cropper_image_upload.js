@@ -167,6 +167,9 @@ function multiple_pdf_upload(obj, field, cropper) {
 					var banner_div_id = '<div class="'+field+'_div col-lg-2 col-md-4 col-5"><div class="form-group w-100 px-3 py-3 cover">'+msg+'</div></div>';    
 						jQuery('#'+field+'_view').append(banner_div_id);
 				});
+				request.fail(function(jqXHR, textStatus, errorThrown) {
+					console.error("Server response:", jqXHR.responseText);
+				});
 			}	
 			else {
 				if(jQuery('div.alert').length > 0) {

@@ -23,7 +23,7 @@
             $target_dir = $obj->image_directory(); $temp_dir = $obj->temp_image_directory();
         ?>
 
-        <form class="poppins pd-20 redirection_form" name="newsletter_form" method="POST">
+        <form class="poppins pd-20 redirection_form" name="newsletter_form" method="POST" enctype="multipart/form-data">
 			<div class="card-header">
 				<div class="row p-2">
 					<div class="col-lg-8 col-md-8 col-8 align-self-center">
