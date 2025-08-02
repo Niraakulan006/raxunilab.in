@@ -141,7 +141,21 @@
 					</div>
 				<?php } ?>
 			</div>
-			<div class="font2 pb-2 description_div" style="list-style-type:inherit !important;">
+			<style>
+				.description_div > ul {
+					padding-left: 20px;
+				}
+				.description_div > ol {
+					padding-left: 20px;
+				}
+				.description_div > ul > li, ol > li {
+					list-style-type: inherit!important;
+				}
+				.description_div > table, tr, th, td {
+					border : 1px solid black !important;
+				}
+			</style>
+			<div class="font2 pb-2 description_div">
 				<?php
 					if (!empty($description)) {
 						echo $description;

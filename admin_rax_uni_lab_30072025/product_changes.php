@@ -48,14 +48,15 @@
         
 
         ?>
-        <div class="card-header">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-12 text-end p-2">
-                    <button class="btn btn-danger float-right" style="font-size:11px;" type="button" onclick="window.open('product.php','_self')"> <i class="fa fa-arrow-circle-o-left"></i> &ensp; Back </button>
+        
+        <form class="poppins pd-20 redirection_form" name="product_form" method="POST">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-12 text-end p-2">
+                        <button class="btn btn-danger float-right" style="font-size:11px;" type="button" onclick="window.open('product.php','_self')"> <i class="fa fa-arrow-circle-o-left"></i> &ensp; Back </button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <form class="poppins pd-20 redirection_form" name="product_form" method="POST">
             <div class="row p-3">
                 <input type="hidden" name="edit_id" value="<?php if(!empty($show_product_id)) { echo $show_product_id; } ?>">
                 <div class="col-lg-12">
@@ -225,7 +226,7 @@
                         </div>
 
                         <div class="col-md-12 pt-3 text-center">
-                            <button class="btn btn-dark submit_button" type="button" onclick="Javascript:SaveModalContent(event, 'product_form', 'product_changes.php', 'product.php');">
+                            <button class="btn btn-dark submit_button" type="button">
                                 Submit
                             </button>
                         </div>
@@ -236,18 +237,9 @@
        
         <script type="text/javascript" src="include/js/image_upload.js"></script>
         <script type="text/javascript" src="include/js/cropper_image_upload.js"></script>
-        <script src="include/select2/js/select2.full.min.js"></script>
+        <script src="include/select2/js/select2.min.js"></script>
+        <script src="include/select2/js/select.js"></script>
         <script src="include/js/ckeditor.js"></script>
-        <script>
-            $(function () {
-            //Initialize Select2 Elements
-            $('.select2').select2()
-
-            //Initialize Select2 Elements
-            $('.select2bs4').select2({
-                theme: 'bootstrap4'
-            })})
-        </script>
         <script>
             class MyUploadAdapter {
                 constructor(loader) {
@@ -305,6 +297,16 @@
                     'insertTable', 'outdent', 'indent', '|',
                     'heading',                     
                 ],
+                htmlSupport: {
+                    allow: [
+                        {
+                            name: /.*/, // allow all tags
+                            attributes: true, // allow all attributes
+                            classes: true, // allow all classes
+                            styles: true // allow all inline styles
+                        }
+                    ]
+                },
                 heading: {
                     options: [
                         { model: 'paragraph', title: 'Normal', view: 'p' },
@@ -325,11 +327,15 @@
             })
             
             .then(editor => {
-                // window.editor = edi
+                tamileditorInstance = editor;
                 editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
                     return new MyUploadAdapter(loader);
                 };
-                tamileditorInstance = editor; 
+                 
+                document.querySelector('.submit_button').addEventListener('click', function () {
+                    document.querySelector('input[name="description_content"]').value = tamileditorInstance.getData();
+                    SaveModalContent(event, 'product_form', 'product_changes.php', 'product.php');
+                });
             })
             .catch(error => {
                 console.error(error);
@@ -343,6 +349,9 @@
             ul {
                 list-style-type: disc;
                 padding-left: 20px;
+            }
+            ul > li {
+                list-style-type: disc;
             }
             /* Default styles for ordered list */
             ol {
@@ -365,7 +374,7 @@
                 border-left : 5px !important;
                 /* font-style: normal; */
             }
-            img {
+            .redirection_form > img {
                 width : 100% !important;
                 height: auto;
             } 
@@ -504,8 +513,8 @@
             }
         }
 
-       if(isset($_POST['description'])){
-			$description = $_POST['description'];
+       if(isset($_POST['description_content'])){
+			$description = $_POST['description_content'];
 		}
         $description = preg_replace('/<img(.*?)>/i', '<img$1 style="width: 50%;height: 50%;" />', $description);
         $result = "";
@@ -894,7 +903,6 @@
                 jQuery.ajax({
                     url: post_url, success: function (result) {
                         result = result.trim();
-                        console.log("YEss :"+result);
                         if(parseInt(result) == 1) {
                             window.location.reload();
                         }
