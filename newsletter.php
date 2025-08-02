@@ -42,7 +42,7 @@
 <?php include('header.php') ?>
 
 <?php 
-	$target_dir_front = "admin_rax_uni_lab_30072025/include/images/upload/";
+	$target_dir = $obj->front_end_image_directory();
 	$newsletter_record = array(); $newsletter_record_count = 0; $newsletter_pdfs = array(); $pdf_names = array();
     $newsletter_record = $obj->getTableRecords($GLOBALS['newsletter_table'],'','','');
     if(!empty($newsletter_record)){
@@ -91,10 +91,10 @@
 								?>
 								<div class="col-lg-4 col-md-12 col-12 py-2">
 									<div class="sticky-top1">
-										<div id="pdf-preview-container-<?php echo $i; ?>" style="border:1px solid black; width:252px; height:322px; margin:auto; cursor:pointer;" onclick="Javascript:downloadPDF('<?php echo $target_dir_front.$newsletter_pdfs[$i]; ?>', '<?php echo $pdf_names[$i]; ?>');">
+										<div id="pdf-preview-container-<?php echo $i; ?>" style="border:1px solid black; width:252px; height:322px; margin:auto; cursor:pointer;" onclick="Javascript:downloadPDF('<?php echo $target_dir.$newsletter_pdfs[$i]; ?>', '<?php echo $pdf_names[$i]; ?>');">
 											<script>
 												jQuery(document).ready(function(){
-													renderFirstPage('<?php echo $target_dir_front.$newsletter_pdfs[$i]; ?>', '<?php echo $i; ?>');
+													renderFirstPage('<?php echo $target_dir.$newsletter_pdfs[$i]; ?>', '<?php echo $i; ?>');
 												});
 											</script>
 										</div>

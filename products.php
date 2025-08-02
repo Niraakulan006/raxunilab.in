@@ -1,11 +1,42 @@
 
+<?php
+	include("admin_rax_uni_lab_30072025/include_files.php");
+	
+	$product_id = $product_name = $description = ''; $related_products = array();
+	$target_dir = $obj->front_end_image_directory();
+
+	if(isset($_REQUEST['product_id'])) {
+		$product_id = $_REQUEST['product_id'];
+	}
+
+	$product_data = array();
+	$product_data = $obj->getTableRecords($GLOBALS['product_table'],'product_id', $product_id);
+
+	if(!empty($product_data)) {
+		foreach($product_data as $data) {
+			if(!empty($data['product_name']) && $data['product_name'] != $GLOBALS['null_value']) {
+				$product_name = $obj->encode_decode('decrypt', $data['product_name']);
+			}
+			if(!empty($data['description']) && $data['description'] != $GLOBALS['null_value']) {
+				$description = html_entity_decode($obj->encode_decode('decrypt', $data['description']));
+			}
+			if(!empty($data['images']) && $data['images'] != $GLOBALS['null_value']) {
+				$images = explode(',',$data['images']);
+			}
+			if(!empty($data['related_products']) && $data['related_products'] != $GLOBALS['null_value']) {
+				$related_products = explode(",", $data['related_products']);
+			}
+		}
+	}
+?>
+
 <!DOCTYPE html>
 <?php 
 	$page = "products";
 ?>
 <html lang="en">
 <head itemscope itemtype="http://www.schema.org/website">
-	<title></title>
+	<title><?php echo $product_name; ?></title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta property="og:title" content="">
@@ -37,35 +68,7 @@
 </head>
 <body itemscope itemtype="http://schema.org/WebPage">
 
-<?php include('header.php') ?>
-<?php 
-	$product_id = $product_name = $description = ''; $related_products = array();
-	$target_dir = $obj->front_image_directory(); $description_dir = $obj->front_end_description_directory();
-
-	if(isset($_REQUEST['product_id'])) {
-		$product_id = $_REQUEST['product_id'];
-	}
-
-	$product_data = array();
-	$product_data = $obj->getTableRecords($GLOBALS['product_table'],'product_id', $product_id);
-
-	if(!empty($product_data)) {
-		foreach($product_data as $data) {
-			if(!empty($data['product_name']) && $data['product_name'] != $GLOBALS['null_value']) {
-				$product_name = $obj->encode_decode('decrypt', $data['product_name']);
-			}
-			if(!empty($data['description']) && $data['description'] != $GLOBALS['null_value']) {
-				$description = html_entity_decode($obj->encode_decode('decrypt', $data['description']));
-			}
-			if(!empty($data['images']) && $data['images'] != $GLOBALS['null_value']) {
-				$images = explode(',',$data['images']);
-			}
-			if(!empty($data['related_products']) && $data['related_products'] != $GLOBALS['null_value']) {
-				$related_products = explode(",", $data['related_products']);
-			}
-		}
-	}
-?>
+<?php include('product_header.php') ?>
 
 <div class="breadcumb-bg">
 	<div class="container">
@@ -109,11 +112,11 @@
 							<div id="imageCarousel" class="carousel slide" data-ride="carousel">
 							<div class="carousel-inner">
 								<?php 
-									$activeSet = false;
+									$activeSet = false; $present = 0;
 									foreach ($images as $key => $image) {
 										if (!empty($image) && file_exists($target_dir . $image)) {
 											$activeClass = !$activeSet ? 'active' : '';
-											$activeSet = true;
+											$activeSet = true; $present++;
 											?>
 											<div class="carousel-item <?php echo $activeClass; ?>">
 												<img src="<?php echo $target_dir.$image; ?>" class="d-block w-100" alt="Slide <?php echo $key + 1; ?>">
@@ -125,7 +128,7 @@
 							</div>
 
 							<!-- Controls -->
-							<?php if(!empty($images)) { ?>
+							<?php if($present > 1) { ?>
 								<a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
 									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 									<span class="sr-only">Previous</span>
@@ -165,9 +168,10 @@
 			<script type="text/javascript">
 				if(jQuery('.description_div').length > 0) {
 					jQuery('.description_div').find('img').each(function() {
-						var src_attr = jQuery(this).attr('src');
-						var admin_folder_name = "admin_rax_uni_lab_30072025/";
-						jQuery(this).attr('src', admin_folder_name+src_attr);
+						const fullPath = jQuery(this).attr('src');
+						const fileName = fullPath.split('/').pop();
+						var admin_folder = '<?php echo $obj->front_end_image_directory(); ?>';
+						jQuery(this).attr('src', admin_folder+fileName);
 					});
 				}
 			</script>
@@ -180,71 +184,97 @@
 					</div>
 					<?php $index = 0; ?>
 					<ul class="fullpad mainmenu pb-2 pt-2">
-						<?php if (!empty($category_list)) {
-							foreach ($category_list as $c_list) {
-								$cat_id = $obj->encode_decode('decrypt', $c_list['category_id']);
-								$cat_name = $obj->encode_decode('decrypt', $c_list['category_name']);
-						?>
-							<li>
-								<div class="accordion" id="accordionCategory_<?php echo $index; ?>">
-									<div class="card">
-										<!-- Category Header -->
-										<div class="card-header" id="heading_<?php echo $cat_id; ?>" data-toggle="collapse" data-target="#collapse_<?php echo $cat_id; ?>" aria-expanded="false" aria-controls="collapse_<?php echo $cat_id; ?>">
-											<a class="font2 pl-3 sidefnt clr3 d-block">
-												<i class="bi bi-chevron-right text-light"></i>&ensp;
-												<?php echo $cat_name; ?>
-												&ensp;<i class="bi bi-chevron-down"></i>
-											</a>
-										</div>
+						<?php 
+							if(!empty($category_list)) {
+								foreach ($category_list as $c_list) {
+									$cat_id = $obj->encode_decode('decrypt', $c_list['category_id']);
+									$cat_name = $obj->encode_decode('decrypt', $c_list['category_name']);
+									$sub_category_list = array();
+									$sub_category_list = $obj->getCategoryFilterList('child',$c_list['category_id']); 
+									$c_product_list = array();
+									$c_product_list = $obj->getProductListByCategory($c_list['category_id'],'');
 
-										<!-- Category Collapse -->
-										<div id="collapse_<?php echo $cat_id; ?>" class="collapse" aria-labelledby="heading_<?php echo $cat_id; ?>" data-parent="#accordionCategory_<?php echo $index; ?>">
-											<div class="card-body">
-												<ul class="pl-3">
-													<?php
-													$sub_category_list = $obj->getCategoryFilterList('child', $c_list['category_id']);
-													foreach ($sub_category_list as $sub_list) {
-														$sub_id = $obj->encode_decode('decrypt', $sub_list['category_id']);
-														$sub_name = $obj->encode_decode('decrypt', $sub_list['category_name']);
-													?>
-														<li>
-															<!-- Subcategory Header -->
-															<div class="card-header" id="sub_heading_<?php echo $sub_id; ?>" data-toggle="collapse" data-target="#sub_collapse_<?php echo $sub_id; ?>" aria-expanded="false" aria-controls="sub_collapse_<?php echo $sub_id; ?>">
-																<a class="font2 pl-3 sidefnt clr3 d-block">
-																	<i class="bi bi-chevron-right text-light"></i>&ensp;
-																	<?php echo $sub_name; ?>
-																	&ensp;<i class="bi bi-chevron-down"></i>
-																</a>
-															</div>
+									if(!empty($sub_category_list) || !empty($c_product_list)) {
+										?>
+										<li>
+											<div class="accordion" id="accordionCategory_<?php echo $index; ?>">
+												<div class="card">
+													<!-- Category Header -->
+													<div class="card-header" id="heading_<?php echo $cat_id; ?>" data-toggle="collapse" data-target="#collapse_<?php echo $cat_id; ?>" aria-expanded="false" aria-controls="collapse_<?php echo $cat_id; ?>" style="cursor:pointer;">
+														<a class="font2 pl-3 sidefnt clr3 d-block">
+															<i class="bi bi-chevron-right text-light"></i>&ensp;
+															<?php echo $cat_name; ?>
+															&ensp;<i class="bi bi-chevron-down"></i>
+														</a>
+													</div>
 
-															<!-- Subcategory Collapse (no data-parent here!) -->
-															<div id="sub_collapse_<?php echo $sub_id; ?>" class="collapse" aria-labelledby="sub_heading_<?php echo $sub_id; ?>">
-																<div class="card-body">
-																	<ul class="pl-3">
-																		<?php
-																		$product_list = $obj->getProductListByCategory('', $sub_list['category_id']);
-																		foreach ($product_list as $p_list) {
-																			$product_name = $obj->encode_decode('decrypt', $p_list['product_name']);
+													<!-- Category Collapse -->
+													<div id="collapse_<?php echo $cat_id; ?>" class="collapse" aria-labelledby="heading_<?php echo $cat_id; ?>" data-parent="#accordionCategory_<?php echo $index; ?>">
+														<div class="card-body">
+															<ul class="pl-3">
+																<?php
+																	foreach ($sub_category_list as $sub_list) {
+																		$sub_id = $obj->encode_decode('decrypt', $sub_list['category_id']);
+																		$sub_name = $obj->encode_decode('decrypt', $sub_list['category_name']);
 																		?>
-																			<li>
-																				<a href="products.php?product_id=<?php echo $p_list['product_id']; ?>" class="font2 sidefnt">
-																					<i class="bi bi-chevron-right fontsize clr2"></i>&ensp;
-																					<?php echo $product_name; ?>
+																		<li>
+																			<!-- Subcategory Header -->
+																			<div class="card-header" id="sub_heading_<?php echo $sub_id; ?>" data-toggle="collapse" data-target="#sub_collapse_<?php echo $sub_id; ?>" aria-expanded="false" aria-controls="sub_collapse_<?php echo $sub_id; ?>">
+																				<a class="font2 pl-3 sidefnt clr3 d-block">
+																					<i class="bi bi-chevron-right text-light"></i>&ensp;
+																					<?php echo $sub_name; ?>
+																					&ensp;<i class="bi bi-chevron-down"></i>
 																				</a>
-																			</li>
-																		<?php } ?>
-																	</ul>
-																</div>
-															</div>
-														</li>
-													<?php } ?>
-												</ul>
+																			</div>
+
+																			<!-- Subcategory Collapse (no data-parent here!) -->
+																			<div id="sub_collapse_<?php echo $sub_id; ?>" class="collapse" aria-labelledby="sub_heading_<?php echo $sub_id; ?>">
+																				<div class="card-body">
+																					<ul class="pl-3">
+																						<?php
+																							$product_list = $obj->getProductListByCategory('', $sub_list['category_id']);
+																							foreach ($product_list as $p_list) {
+																								$product_name = $obj->encode_decode('decrypt', $p_list['product_name']);
+																								?>
+																								<li>
+																									<a href="products.php?product_id=<?php echo $p_list['product_id']; ?>" class="font2 sidefnt">
+																										<i class="bi bi-chevron-right fontsize clr2"></i>&ensp;
+																										<?php echo $product_name; ?>
+																									</a>
+																								</li>
+																								<?php 
+																							} 
+																						?>
+																					</ul>
+																				</div>
+																			</div>
+																		</li>
+																		<?php 
+																	}
+																	foreach ($c_product_list as $p_list) {
+																		$product_name = $obj->encode_decode('decrypt', $p_list['product_name']);
+																		?>
+																		<li>
+																			<a href="products.php?product_id=<?php echo $p_list['product_id']; ?>" class="font2 sidefnt">
+																				<i class="bi bi-chevron-right fontsize clr2"></i>&ensp;
+																				<?php echo $product_name; ?>
+																			</a>
+																		</li>
+																		<?php 
+																	} 
+																?>
+															</ul>
+														</div>
+													</div>
+												</div>
 											</div>
-										</div>
-									</div>
-								</div>
-							</li>
-						<?php $index++; } } ?>
+										</li>
+										<?php 
+										$index++; 
+									} 
+								} 
+							}
+						?>
 					</ul>
 				</div>
 			</div>
@@ -259,7 +289,6 @@
 			</div>
 			<div id="products" class="owl-carousel">
 				<?php 
-					$target_dir_front = "admin_rax_uni_lab_30072025/include/images/upload/";
 					for($i=0; $i < count($related_products); $i++) {
 						$related_products_list = array();
 						$related_products_list = $obj->getTableRecords($GLOBALS['product_table'], 'product_id', $related_products[$i]);
@@ -279,7 +308,7 @@
 										<div class="product-head">
 											<div class="product-inner overlay-anim">
 												<figure class="image">
-													<img src="<?php if(file_exists($target_dir_front.$first_image)) { echo $target_dir_front.$first_image; } else { echo 'images/producta1.png'; } ?>" class="img-fluid" alt="<?php echo $product_name; ?>" title="<?php echo $product_name; ?>">
+													<img src="<?php if(file_exists($target_dir.$first_image)) { echo $target_dir.$first_image; } else { echo 'images/producta1.png'; } ?>" class="img-fluid" alt="<?php echo $product_name; ?>" title="<?php echo $product_name; ?>">
 												</figure>
 											</div>
 											<div class="product-content">

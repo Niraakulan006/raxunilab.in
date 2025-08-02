@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 // Check if the file is uploaded via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['upload'])) {
     // Define the upload directory
-    $uploadDir = 'images/ck_upload/';
+    $uploadDir = '../images/upload/';
     // Ensure the upload directory exists
     if (!is_dir($uploadDir)) {
         mkdir($uploadDir, 0777, true);

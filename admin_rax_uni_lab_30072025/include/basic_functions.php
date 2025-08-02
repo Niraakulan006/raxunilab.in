@@ -531,23 +531,19 @@
 		}
 
 		public function image_directory() {
-			$target_dir = "include/images/upload/";
+			$target_dir = "../images/upload/";
 			return $target_dir;
 		}
-		public function front_image_directory() {
-			$target_dir = "admin_rax_uni_lab_30072025/include/images/upload/";
-			return $target_dir;
-		}
-		public function front_end_description_directory() {
-			$target_dir = "admin_rax_uni_lab_30072025/images/ck_upload/";
+		public function front_end_image_directory() {
+			$target_dir = "images/upload/";
 			return $target_dir;
 		}
 		public function temp_image_directory() {
-			$temp_dir = "include/images/temp/";
+			$temp_dir = "../images/temp/";
 			return $temp_dir;
 		}
 		public function clear_temp_image_directory() {
-			$temp_dir = "include/images/temp/";
+			$temp_dir = "../images/temp/";
 			
 			$files = glob($temp_dir.'*'); // get all file names
 			foreach($files as $file){ // iterate files

@@ -38,7 +38,7 @@
 	
 <?php 
 	include('header.php');
-	$target_dir_front = "admin_rax_uni_lab_30072025/include/images/upload/";
+	$target_dir = $obj->front_end_image_directory();
 	$home_banner_list = array(); $home_screen_image = "";
 	$home_banner_list = $obj->getTableRecords($GLOBALS['home_banner_table'], '', '');
 	if(!empty($home_banner_list)) {
@@ -58,9 +58,9 @@
 		}
 	}
 
-	if(!empty($home_screen_image) && file_exists($target_dir_front.$home_screen_image)) {
+	if(!empty($home_screen_image) && file_exists($target_dir.$home_screen_image)) {
 		?>
-		<img src="<?php echo $target_dir_front.$home_screen_image; ?>" class="img-fluid w-100 d-lg-block d-none" alt="<?php echo $home_screen_image; ?>" title="<?php echo $home_screen_image; ?>">
+		<img src="<?php echo $target_dir.$home_screen_image; ?>" class="img-fluid w-100 d-lg-block d-none" alt="<?php echo $home_screen_image; ?>" title="<?php echo $home_screen_image; ?>">
 		<?php
 	}
 	else {
@@ -68,9 +68,9 @@
 		<img src="images/banner1.png" class="img-fluid w-100 d-lg-block d-none" alt="banner1" title="banner1">
 		<?php
 	}
-	if(!empty($mobile_screen_image) && file_exists($target_dir_front.$mobile_screen_image)) {
+	if(!empty($mobile_screen_image) && file_exists($target_dir.$mobile_screen_image)) {
 		?>
-		<img src="<?php echo $target_dir_front.$mobile_screen_image; ?>" class="img-fluid w-100 d-lg-none d-sm-block" alt="<?php echo $mobile_screen_image; ?>" title="<?php echo $mobile_screen_image; ?>">
+		<img src="<?php echo $target_dir.$mobile_screen_image; ?>" class="img-fluid w-100 d-lg-none d-sm-block" alt="<?php echo $mobile_screen_image; ?>" title="<?php echo $mobile_screen_image; ?>">
 		<?php
 	}
 ?>
@@ -275,7 +275,7 @@
 								<div class="product-head">
 									<div class="product-inner overlay-anim">
 										<figure class="image">
-											<img src="<?php if(file_exists($target_dir_front.$first_image)) { echo $target_dir_front.$first_image; } else { echo 'images/producta1.png'; } ?>" class="img-fluid" alt="<?php echo $product_name; ?>" title="<?php echo $product_name; ?>">
+											<img src="<?php if(file_exists($target_dir.$first_image)) { echo $target_dir.$first_image; } else { echo 'images/producta1.png'; } ?>" class="img-fluid" alt="<?php echo $product_name; ?>" title="<?php echo $product_name; ?>">
 										</figure>
 									</div>
 									<div class="product-content">

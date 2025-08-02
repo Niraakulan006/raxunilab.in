@@ -308,11 +308,11 @@
                             <i class="bi bi-question-circle"></i><span>Product Enquiry</span>
                         </a>
                     </li>
-                    <li class="nav-item" id="contactenquiry">
+                    <!-- <li class="nav-item" id="contactenquiry">
                         <a class="nav-link menu-link" href="contact_enquiry.php">
                             <i class="bi bi-envelope"></i><span>Contact Enquiry</span>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
