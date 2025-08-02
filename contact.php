@@ -78,7 +78,7 @@
 	</div>
 	<div class="row pt-3">
 		<div class="col-lg-6 col-md-12 col-12 pt-4 h-100">
-			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62970.01116422078!2d77.79262294999998!3d9.454182000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b06cee43d812d0d%3A0x8ce12e9dcdaa2a2c!2sSivakasi%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1702484610484!5m2!1sen!2sin" width="100%" height="430" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+		    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3341.4121158914113!2d80.0895223!3d12.9597776!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52f5004ccdfd47%3A0xaea72d3b20cbf1c8!2sRAX%20UNIQUE%20TECHNOLOGIES!5e1!3m2!1sen!2sin!4v1754122544683!5m2!1sen!2sin"width="100%" height="430" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 		</div>
 		<div class="col-lg-6 col-md-12 col-12 pt-4 h-100">
 			<div class="bg-light p-lg-5 p-3">

@@ -1,0 +1,8 @@
+[01-Aug-2025 13:28:27 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/h2pil1aoovs5/public_html/subha2022/raxunilab.in/admin_rax_uni_lab_30072025/include/basic_functions.php:398
+Stack trace:
+#0 /home/h2pil1aoovs5/public_html/subha2022/raxunilab.in/admin_rax_uni_lab_30072025/include/creation_functions.php(481): Basic_Functions->getQueryRecords()
+#1 /home/h2pil1aoovs5/public_html/subha2022/raxunilab.in/admin_rax_uni_lab_30072025/include/functions.php(275): Creation_functions->getCategoryFilterList()
+#2 /home/h2pil1aoovs5/public_html/subha2022/raxunilab.in/header.php(4): billing->getCategoryFilterList()
+#3 /home/h2pil1aoovs5/public_html/subha2022/raxunilab.in/index.php(40): include('/home/h2pil1aoo...')
+#4 {main}
+  thrown in /home/h2pil1aoovs5/public_html/subha2022/raxunilab.in/admin_rax_uni_lab_30072025/include/basic_functions.php on line 398
